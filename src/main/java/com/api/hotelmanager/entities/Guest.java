@@ -1,7 +1,6 @@
 package com.api.hotelmanager.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -11,10 +10,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Singular;
 
 @Entity
 @Table(name = "tb_guests")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Data
 public class Guest implements Serializable{
 	 
@@ -28,6 +34,7 @@ public class Guest implements Serializable{
 	private String phone;
 	
 	@OneToMany(mappedBy = "guest",cascade = CascadeType.ALL)
-	private List<Reservation> reservations = new ArrayList<>();
+	@Singular
+	private List<Reservation> reservations;
 
 }
