@@ -2,6 +2,8 @@ package com.api.hotelmanager.controllers;
 
 import java.net.URI;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +27,14 @@ public class GuestController {
 
 	private final GuestService guestService;
 	
+	@GetMapping
+	public ResponseEntity<Page<GuestResponse>> getAllGuests(Pageable pageable){
+		return ResponseEntity.ok(guestService.getAllGuests(pageable));
+	}
+	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<GuestResponse> getGuest(@PathVariable Long id) {
-		
 		GuestResponse guestResponse = guestService.getGuest(id);
-		
 		return ResponseEntity.ok(guestResponse);
 	}
 	
@@ -39,11 +44,8 @@ public class GuestController {
 			UriComponentsBuilder uriComponentsBuilder) {
 		
 		Guest guest = guestService.createGuest(guestRequest);
-		
 		URI uri = uriComponentsBuilder.path("api/guest/{id}")
 				.buildAndExpand(guest.getId()).toUri();
-		
-		
 		return ResponseEntity.created(uri).body(guest);
 	}
 }
