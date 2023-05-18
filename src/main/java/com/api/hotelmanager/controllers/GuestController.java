@@ -33,7 +33,7 @@ public class GuestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<GuestResponse> getGuest(@PathVariable Long id) {
+	public ResponseEntity<GuestResponse> getGuest(@PathVariable String id) {
 		GuestResponse guestResponse = guestService.getGuest(id);
 		return ResponseEntity.ok(guestResponse);
 	}

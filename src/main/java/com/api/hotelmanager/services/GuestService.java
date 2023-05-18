@@ -18,7 +18,7 @@ public class GuestService {
 
 	private final GuestRepository guestRepository;
 	
-	public GuestResponse getGuest(Long id) {	
+	public GuestResponse getGuest(String id) {	
 		GuestResponse guestResponse = mapToGuestResponse(guestRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Guest not found")));
 		return guestResponse;
@@ -37,10 +37,10 @@ public class GuestService {
 	
 	private Guest mapToGuest(GuestRequest guestRequest) {
 		Guest guest = Guest.builder()
-				.name(guestRequest.getName())
-				.email(guestRequest.getEmail())
-				.phone(guestRequest.getPhone())
-				.reservations(guestRequest.getReservations())
+				.name(guestRequest.name())
+				.email(guestRequest.email())
+				.phone(guestRequest.phone())
+				.reservations(guestRequest.reservations())
 				.build();
 		return guest;
 	}
