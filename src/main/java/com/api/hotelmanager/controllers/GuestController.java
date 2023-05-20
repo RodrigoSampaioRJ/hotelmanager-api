@@ -18,6 +18,7 @@ import com.api.hotelmanager.dtos.GuestResponse;
 import com.api.hotelmanager.entities.Guest;
 import com.api.hotelmanager.services.GuestService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -40,7 +41,9 @@ public class GuestController {
 	
 	@PostMapping
 	public ResponseEntity<Guest> createGuest(
-			@RequestBody GuestRequest guestRequest,
+			@RequestBody 
+			@Valid 
+			GuestRequest guestRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
 		
 		Guest guest = guestService.createGuest(guestRequest);

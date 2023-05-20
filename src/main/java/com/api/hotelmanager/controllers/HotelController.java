@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.api.hotelmanager.dtos.GuestResponse;
 import com.api.hotelmanager.dtos.HotelRequest;
 import com.api.hotelmanager.dtos.HotelResponse;
 import com.api.hotelmanager.entities.Hotel;
 import com.api.hotelmanager.services.HotelService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -41,7 +41,10 @@ public class HotelController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Hotel> createHotel(@RequestBody HotelRequest hotelRequest,
+	public ResponseEntity<Hotel> createHotel(
+			@RequestBody 
+			@Valid
+			HotelRequest hotelRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
 		Hotel hotel = hotelService.createHotel(hotelRequest);
 		URI uri = uriComponentsBuilder
