@@ -3,6 +3,8 @@ package com.api.hotelmanager.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +33,7 @@ public class Reservation implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "guest_id")
+	@JsonBackReference
 	private Guest guest;
 	
 	@ManyToOne
@@ -38,6 +41,7 @@ public class Reservation implements Serializable{
 	private Room room;
 	
 	private Instant checkIn;
+	
 	private Instant checkOut;
 	
 	public Double totalCost() {

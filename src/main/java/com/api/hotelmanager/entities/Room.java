@@ -2,6 +2,8 @@ package com.api.hotelmanager.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +35,7 @@ public class Room implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "hotel_id")
+	@JsonBackReference
 	private Hotel hotel;
 	
 	public Boolean isAvailable() {

@@ -3,6 +3,8 @@ package com.api.hotelmanager.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +35,7 @@ public class Hotel implements Serializable{
 	private Integer stars;
 	
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Room> rooms;
 
 }

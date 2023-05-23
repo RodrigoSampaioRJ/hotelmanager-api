@@ -38,7 +38,7 @@ public class HotelService {
 		return hotel;
 	}
 	
-	private Hotel mapToHotel(HotelRequest hotelRequest) {
+	public Hotel mapToHotel(HotelRequest hotelRequest) {
 		Hotel hotel = Hotel.builder()
 				.name(hotelRequest.name())
 				.address(hotelRequest.address())
@@ -48,12 +48,13 @@ public class HotelService {
 		return hotel;
 	}
 	
-	private HotelResponse mapTohotelResponse(Hotel hotel) {
+	public HotelResponse mapTohotelResponse(Hotel hotel) {
 		HotelResponse hotelResponse = HotelResponse.builder()
 				.name(hotel.getName())
 				.address(hotel.getAddress())
 				.stars(hotel.getStars())
 				.rooms(hotel.getRooms())
+				.id(hotel.getId())
 				.build();
 		return hotelResponse;
 	}
