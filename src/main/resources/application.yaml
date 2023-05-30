@@ -14,4 +14,11 @@ spring:
         show-sql: true
         database: MYSQL
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id: 914995899417-2rhh0rmm4krt39cg5dom1nj53ob4rvec.apps.googleusercontent.com
+                        client-secret: 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

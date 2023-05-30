@@ -15,22 +15,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RoomService {
 
-	private final RoomRepository roomRepository;
-	private final RoomMapper mapper;
-	
-	public RoomResponse getRoom(Long id) {
-		
-		RoomResponse roomResponse = mapper.roomToRoomResponse(roomRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Room not found")));
-		
-		return roomResponse;
-	}
-	
-	public Room createRoom(RoomRequest roomRequest) {
+    private final RoomRepository roomRepository;
+    private final RoomMapper mapper;
 
-		Room room = roomRepository.save(mapper.roomRequestToRoom(roomRequest));	
-		
-		return room;
-	}
-	
+    public RoomResponse getRoom(Long id) {
+
+        RoomResponse roomResponse = mapper.roomToRoomResponse(roomRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Room not found")));
+
+        return roomResponse;
+    }
+
+    public Room createRoom(RoomRequest roomRequest) {
+
+        Room room = roomRepository.save(mapper.roomRequestToRoom(roomRequest));
+
+        return room;
+    }
+
 }

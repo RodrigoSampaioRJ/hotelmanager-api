@@ -9,17 +9,17 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class CustomWebSecurityConfigurerAdapter {
+public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	return http
-    			.authorizeHttpRequests((authorizationConfig) -> {
+    			.authorizeHttpRequests(authorizationConfig -> {
     				authorizationConfig.requestMatchers("/login");
     				authorizationConfig.requestMatchers("/logout").permitAll();
     				authorizationConfig.anyRequest().authenticated();
     			})
-    			.formLogin(Customizer.withDefaults())
+    			.oauth2Login(Customizer.withDefaults())
     			.build();
     }
 

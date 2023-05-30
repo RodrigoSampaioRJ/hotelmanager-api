@@ -10,7 +10,7 @@ import com.api.hotelmanager.entities.Room;
 @Mapper(componentModel = "spring")
 public interface RoomMapper {
 	
-	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "id",ignore = true)
 	Room roomRequestToRoom(RoomRequest roomRequest);
 	RoomResponse roomToRoomResponse(Room room);
 }
