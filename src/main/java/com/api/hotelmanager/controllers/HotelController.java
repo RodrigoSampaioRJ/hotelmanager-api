@@ -5,6 +5,8 @@ import java.net.URI;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +39,7 @@ public class HotelController {
 	@GetMapping
 	public ResponseEntity<Page<HotelResponse>> getAll(Pageable page){
 		Page<HotelResponse> hotelResponsePage = hotelService.getAll(page);
+
 		return ResponseEntity.ok(hotelResponsePage);
 	}
 	
@@ -49,8 +52,7 @@ public class HotelController {
 		Hotel hotel = hotelService.createHotel(hotelRequest);
 		URI uri = uriComponentsBuilder
 				.path("/api/hotel/{id}")
-				.buildAndExpand(hotel
-						.getId())
+				.buildAndExpand(hotel.getId())
 				.toUri();
 		return ResponseEntity.created(uri).body(hotel);
 	}

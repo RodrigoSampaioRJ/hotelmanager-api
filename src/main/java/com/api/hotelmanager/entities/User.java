@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,7 +13,6 @@ import java.util.List;
 @Table(name = "tb_user")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString(exclude = "password")
 @EqualsAndHashCode(of = "id")
 @Builder
@@ -31,6 +31,16 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "profile_id"))
     private List<Profile> profiles;
+
+    public User(Long id, String name, String login,String password, String email, List<Profile> profiles){
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.profiles = new ArrayList<>();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return profiles;

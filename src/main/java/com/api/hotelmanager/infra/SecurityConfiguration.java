@@ -17,9 +17,10 @@ public class SecurityConfiguration {
     			.authorizeHttpRequests(authorizationConfig -> {
     				authorizationConfig.requestMatchers("/login");
     				authorizationConfig.requestMatchers("/logout").permitAll();
-    				authorizationConfig.anyRequest().authenticated();
+    				authorizationConfig.anyRequest().permitAll();
     			})
     			.oauth2Login(Customizer.withDefaults())
+				.csrf().disable()
     			.build();
     }
 
