@@ -1,19 +1,17 @@
 package com.api.hotelmanager.entities;
 
+import com.api.hotelmanager.enums.RoleName;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_profiles")
+@Table(name = "tb_profile")
 @Data
 @Builder
 @AllArgsConstructor
@@ -24,10 +22,12 @@ public class Profile implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @NotBlank
+    private RoleName roleName;
 
     @Override
     public String getAuthority() {
-        return this.name;
+        return this.roleName.toString();
     }
 }

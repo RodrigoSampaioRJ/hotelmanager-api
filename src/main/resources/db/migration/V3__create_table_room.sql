@@ -1,6 +1,6 @@
 -- hotelmanager.tb_rooms definition
 
-CREATE TABLE `tb_rooms`
+CREATE TABLE `tb_room`
 (
     `id`       bigint NOT NULL AUTO_INCREMENT,
     `number`   int          DEFAULT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `tb_rooms`
     `hotel_id` bigint       DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `FK4cg8dh2icnva6lu4p5ig6ro6j` (`hotel_id`),
-    CONSTRAINT `FK4cg8dh2icnva6lu4p5ig6ro6j` FOREIGN KEY (`hotel_id`) REFERENCES `tb_hotels` (`id`)
+    CONSTRAINT `FK4cg8dh2icnva6lu4p5ig6ro6j` FOREIGN KEY (`hotel_id`) REFERENCES `tb_hotel` (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 10
   DEFAULT CHARSET = utf8mb4

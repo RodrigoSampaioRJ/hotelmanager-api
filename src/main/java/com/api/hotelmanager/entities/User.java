@@ -27,7 +27,7 @@ public class User implements UserDetails {
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_user_profiles",
+    @JoinTable(name = "tb_user_profile",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "profile_id"))
     private List<Profile> profiles;

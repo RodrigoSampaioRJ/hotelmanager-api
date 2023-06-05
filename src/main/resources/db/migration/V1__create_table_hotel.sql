@@ -1,6 +1,6 @@
 -- hotelmanager.tb_hotels definition
 
-CREATE TABLE `tb_hotels`
+CREATE TABLE `tb_hotel`
 (
     `id`      bigint NOT NULL AUTO_INCREMENT,
     `address` varchar(255) DEFAULT NULL,

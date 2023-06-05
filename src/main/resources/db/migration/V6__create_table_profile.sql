@@ -1,7 +1,7 @@
-CREATE TABLE `tb_profiles`
+CREATE TABLE `tb_profile`
 (
     `id`   bigint NOT NULL AUTO_INCREMENT,
-    `name` varchar(255) NOT NULL,
+    `role_name` varchar(255) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 5

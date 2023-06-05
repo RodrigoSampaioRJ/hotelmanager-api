@@ -1,4 +1,4 @@
-CREATE TABLE `tb_user_profiles`
+CREATE TABLE `tb_user_profile`
 (
     `user_id`   bigint NOT NULL,
     `profile_id` bigint NOT NULL,

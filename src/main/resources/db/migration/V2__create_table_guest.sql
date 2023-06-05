@@ -1,6 +1,6 @@
 -- hotelmanager.tb_guests definition
 
-CREATE TABLE `tb_guests`
+CREATE TABLE `tb_guest`
 (
     `id`    varchar(255) NOT NULL,
     `email` varchar(255) DEFAULT NULL,

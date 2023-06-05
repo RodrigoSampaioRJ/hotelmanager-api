@@ -1,6 +1,6 @@
 -- hotelmanager.tb_reservations definition
 
-CREATE TABLE `tb_reservations`
+CREATE TABLE `tb_reservation`
 (
     `id`        bigint NOT NULL AUTO_INCREMENT,
     `check_in`  datetime(6)  DEFAULT NULL,
@@ -10,8 +10,8 @@ CREATE TABLE `tb_reservations`
     PRIMARY KEY (`id`),
     KEY `FKgbjjdnqdownwt6suhgqh3vwa` (`guest_id`),
     KEY `FKmk7oosf019u27lbtpfiuofhcu` (`room_id`),
-    CONSTRAINT `FKgbjjdnqdownwt6suhgqh3vwa` FOREIGN KEY (`guest_id`) REFERENCES `tb_guests` (`id`),
-    CONSTRAINT `FKmk7oosf019u27lbtpfiuofhcu` FOREIGN KEY (`room_id`) REFERENCES `tb_rooms` (`id`)
+    CONSTRAINT `FKgbjjdnqdownwt6suhgqh3vwa` FOREIGN KEY (`guest_id`) REFERENCES `tb_guest` (`id`),
+    CONSTRAINT `FKmk7oosf019u27lbtpfiuofhcu` FOREIGN KEY (`room_id`) REFERENCES `tb_room` (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8mb4

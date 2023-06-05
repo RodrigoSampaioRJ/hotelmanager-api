@@ -13,13 +13,12 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    	return http
-    			.authorizeHttpRequests(authorizationConfig -> {
-    				authorizationConfig.requestMatchers("/login");
-    				authorizationConfig.requestMatchers("/logout").permitAll();
-    				authorizationConfig.anyRequest().permitAll();
-    			})
-    			.oauth2Login(Customizer.withDefaults())
+    	return http.httpBasic()
+				.and()
+    			.authorizeHttpRequests()
+				.requestMatchers("/api/user/**").authenticated()
+				.anyRequest().authenticated()
+				.and()
 				.csrf().disable()
     			.build();
     }
