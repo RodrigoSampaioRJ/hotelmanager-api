@@ -1,22 +1,16 @@
 package com.api.hotelmanager.modules.hotel.entity;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.api.hotelmanager.modules.room.entity.Room;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_hotel")
@@ -26,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Hotel implements Serializable{
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id

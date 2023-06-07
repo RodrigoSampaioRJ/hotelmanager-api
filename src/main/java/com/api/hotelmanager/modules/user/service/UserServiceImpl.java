@@ -1,11 +1,11 @@
 package com.api.hotelmanager.modules.user.service;
 
+import com.api.hotelmanager.modules.profile.entity.Profile;
+import com.api.hotelmanager.modules.profile.repository.IProfileRepository;
 import com.api.hotelmanager.modules.user.dto.UserRequest;
 import com.api.hotelmanager.modules.user.dto.UserResponse;
-import com.api.hotelmanager.modules.profile.entity.Profile;
 import com.api.hotelmanager.modules.user.entity.User;
 import com.api.hotelmanager.modules.user.mapper.UserMapper;
-import com.api.hotelmanager.modules.profile.repository.ProfileRepository;
 import com.api.hotelmanager.modules.user.repository.IUserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -17,9 +17,9 @@ public class UserServiceImpl implements IUserService {
     private final IUserRepository userRepository;
     private final UserMapper mapper;
     private final BCryptPasswordEncoder bcrypt;
-    private final ProfileRepository profileRepository;
+    private final IProfileRepository profileRepository;
 
-    public UserServiceImpl(IUserRepository userRepository, UserMapper mapper, BCryptPasswordEncoder bcrypt, ProfileRepository profileRepository){
+    public UserServiceImpl(IUserRepository userRepository, UserMapper mapper, BCryptPasswordEncoder bcrypt, IProfileRepository profileRepository){
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.bcrypt = bcrypt;

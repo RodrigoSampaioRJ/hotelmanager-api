@@ -1,13 +1,9 @@
 package com.api.hotelmanager.exceptions.dto;
 
+import lombok.*;
+
 import java.time.Instant;
 import java.util.List;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor

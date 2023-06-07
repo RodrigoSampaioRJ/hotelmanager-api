@@ -1,12 +1,11 @@
 package com.api.hotelmanager.modules.guest.dto;
 
-import java.util.List;
-
 import com.api.hotelmanager.modules.reservation.entity.Reservation;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
+
+import java.util.List;
 
 
 @Builder

@@ -1,7 +1,6 @@
-package com.api.hotelmanager.infra.configuration.mysql;
+package com.api.hotelmanager.modules.user.repository;
 
 import com.api.hotelmanager.modules.user.entity.User;
-import com.api.hotelmanager.modules.user.repository.IUserRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +40,7 @@ public class MysqlUserRepository implements IUserRepository {
 
     @Override
     public void delete(Long id) {
-
+        this.userRepository.deleteById(id);
     }
 
     @Override

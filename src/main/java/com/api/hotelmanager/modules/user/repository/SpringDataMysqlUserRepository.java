@@ -1,4 +1,4 @@
-package com.api.hotelmanager.infra.configuration.mysql;
+package com.api.hotelmanager.modules.user.repository;
 
 import com.api.hotelmanager.modules.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
