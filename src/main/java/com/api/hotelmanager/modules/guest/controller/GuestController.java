@@ -31,7 +31,7 @@ public class GuestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<GuestResponse> getGuest(@PathVariable String id) {
+	public ResponseEntity<GuestResponse> getGuest(@PathVariable Long id) {
 		GuestResponse guestResponse = guestService.findById(id);
 		return ResponseEntity.ok(guestResponse);
 	}

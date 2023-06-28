@@ -9,6 +9,6 @@ import org.springframework.data.domain.Pageable;
 public interface IGuestService {
     Guest save(GuestRequest guestRequest);
     Page<GuestResponse> findAll(Pageable pageable);
-    GuestResponse findById(String id);
-    void delete(String id);
+    GuestResponse findById(Long id);
+    void delete(Long id);
 }

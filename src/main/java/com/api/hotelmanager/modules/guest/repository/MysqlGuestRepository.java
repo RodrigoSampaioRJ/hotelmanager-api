@@ -19,7 +19,7 @@ public class MysqlGuestRepository implements IGuestRepository{
     }
 
     @Override
-    public Optional<Guest> findById(String id) {
+    public Optional<Guest> findById(Long id) {
         return this.guestRepository.findById(id);
     }
 
@@ -34,7 +34,7 @@ public class MysqlGuestRepository implements IGuestRepository{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         this.guestRepository.deleteById(id);
     }
 }

@@ -1,14 +1,19 @@
 package com.api.hotelmanager.modules.room.entity;
 
 import com.api.hotelmanager.modules.hotel.entity.Hotel;
+import com.api.hotelmanager.modules.reservation.entity.Reservation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_room")
@@ -18,6 +23,7 @@ import java.io.Serializable;
 @Data
 public class Room implements Serializable {
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -27,10 +33,14 @@ public class Room implements Serializable {
 	private String type;
 	private Double price;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = Hotel.class,fetch = FetchType.EAGER)
 	@JoinColumn(name = "hotel_id")
 	@JsonBackReference
 	private Hotel hotel;
+
+	@OneToMany(mappedBy = "room")
+	@JsonManagedReference
+	private List<Reservation> reservations;
 	
 	public Boolean isAvailable() {
 		return null;

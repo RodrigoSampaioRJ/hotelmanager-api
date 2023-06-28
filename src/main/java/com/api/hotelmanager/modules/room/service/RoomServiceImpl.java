@@ -1,22 +1,33 @@
 package com.api.hotelmanager.modules.room.service;
 
+import com.api.hotelmanager.modules.hotel.entity.Hotel;
+import com.api.hotelmanager.modules.hotel.repository.IHotelRepository;
 import com.api.hotelmanager.modules.room.dto.RoomRequest;
 import com.api.hotelmanager.modules.room.dto.RoomResponse;
 import com.api.hotelmanager.modules.room.entity.Room;
 import com.api.hotelmanager.modules.room.mapper.RoomMapper;
 import com.api.hotelmanager.modules.room.repository.IRoomRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+
+import java.time.Instant;
+import java.util.Optional;
 
 public class RoomServiceImpl implements  IRoomService{
 
+    private final IHotelRepository hotelRepository;
     private final IRoomRepository roomRepository;
     private final RoomMapper mapper;
 
-    public RoomServiceImpl(IRoomRepository roomRepository, RoomMapper mapper){
+    public RoomServiceImpl(IRoomRepository roomRepository, RoomMapper mapper, IHotelRepository hotelRepository){
         this.mapper = mapper;
         this.roomRepository = roomRepository;
+        this.hotelRepository = hotelRepository;
     }
 
     @Override
@@ -33,7 +44,11 @@ public class RoomServiceImpl implements  IRoomService{
 
     @Override
     public RoomResponse findById(Long id) {
-        RoomResponse roomResponse = mapper.mapToRoomResponse(roomRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Room not found")));
+        Room room = roomRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Room not found"));
+
+        Optional<Hotel> hotel = hotelRepository.findById(room.getHotel().getId());
+        hotel.ifPresent(room::setHotel);
+        RoomResponse roomResponse = mapper.mapToRoomResponse(room);
         return roomResponse;
     }
 
@@ -41,4 +56,16 @@ public class RoomServiceImpl implements  IRoomService{
     public void delete(Long id) {
         roomRepository.delete(id);
     }
+
+    @Override
+    public boolean isAvailable(Instant checkin, Instant checkout) {
+//        ObjectMapper om = new Jackson2ObjectMapperBuilder().modules(new JavaTimeModule())
+//                .build()
+//                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+
+        return false;
+    }
+
+
 }

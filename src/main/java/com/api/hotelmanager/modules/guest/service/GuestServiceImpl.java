@@ -31,12 +31,12 @@ public class GuestServiceImpl implements  IGuestService{
 	}
 
 	@Override
-	public GuestResponse findById(String id) {
+	public GuestResponse findById(Long id) {
 		return mapper.mapToGuestResponse(guestRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Guest not found")));
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Long id) {
 		guestRepository.delete(id);
 	}
 }

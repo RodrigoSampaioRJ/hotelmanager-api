@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/room")
@@ -45,5 +46,10 @@ public class RoomController {
 				.toUri();
 		
 		return ResponseEntity.created(uri).body(room);
+	}
+
+	@GetMapping(path ="/isavailable")
+	public String isAvailable(@RequestParam Instant checkin,@RequestParam Instant checkout) {
+		return checkin.toString();
 	}
 }

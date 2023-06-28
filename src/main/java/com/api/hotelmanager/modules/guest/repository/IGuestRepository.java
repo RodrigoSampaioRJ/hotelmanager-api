@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface IGuestRepository {
-    Optional<Guest> findById(String id);
+    Optional<Guest> findById(Long id);
     Page<Guest> findAll(Pageable pageable);
     Guest save(Guest guest);
-    void delete(String id);
+    void delete(Long id);
 }

@@ -2,7 +2,7 @@
 
 CREATE TABLE `tb_guest`
 (
-    `id`    varchar(255) NOT NULL,
+    `id`    bigint NOT NULL AUTO_INCREMENT,
     `email` varchar(255) DEFAULT NULL,
     `name`  varchar(255) DEFAULT NULL,
     `phone` varchar(255) DEFAULT NULL,

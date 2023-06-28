@@ -51,13 +51,13 @@ public class BeansConfiguration {
     }
 
     @Bean
-    public IReservationService reservationService(final IReservationRepository reservationRepository, final ReservationMapper mapper){
-        return new ReservationServiceImpl(reservationRepository, mapper);
+    public IReservationService reservationService(final IGuestRepository guestRepository,final IRoomRepository roomRepository, final IReservationRepository reservationRepository, final ReservationMapper mapper){
+        return new ReservationServiceImpl(guestRepository,roomRepository,reservationRepository, mapper);
     }
 
     @Bean
-    public IRoomService roomService(final IRoomRepository roomRepository, final RoomMapper mapper){
-        return new RoomServiceImpl(roomRepository, mapper);
+    public IRoomService roomService(final IRoomRepository roomRepository, final RoomMapper mapper, final IHotelRepository hotelRepository){
+        return new RoomServiceImpl(roomRepository, mapper, hotelRepository);
     }
 
 }

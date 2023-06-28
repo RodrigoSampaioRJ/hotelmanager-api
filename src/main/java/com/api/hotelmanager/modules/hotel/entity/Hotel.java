@@ -1,7 +1,9 @@
 package com.api.hotelmanager.modules.hotel.entity;
 
 import com.api.hotelmanager.modules.room.entity.Room;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,8 +32,10 @@ public class Hotel implements Serializable{
 	private String address;
 	private Integer stars;
 	
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "hotel")
+    @JsonBackReference
+	@JsonManagedReference
+	@JsonProperty
     private List<Room> rooms;
 
 }

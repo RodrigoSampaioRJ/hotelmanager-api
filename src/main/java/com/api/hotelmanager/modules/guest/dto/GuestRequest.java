@@ -17,5 +17,5 @@ public record GuestRequest (
 		@Email(message = "Email is invalid")
 		String email,	
 		@NotBlank(message = "Phone must not be empty")
-		String phone, 
+		String phone,
 		List<Reservation> reservations){}

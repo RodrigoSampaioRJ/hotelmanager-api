@@ -31,7 +31,7 @@ public class MysqlReservationRepository implements IReservationRepository{
 
     @Override
     public Reservation save(Reservation reservation) {
-        return this.save(reservation);
+        return this.reservationRepository.save(reservation);
     }
 
     @Override
