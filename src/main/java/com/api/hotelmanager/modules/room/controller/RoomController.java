@@ -49,7 +49,9 @@ public class RoomController {
 	}
 
 	@GetMapping(path ="/isavailable")
-	public String isAvailable(@RequestParam Instant checkin,@RequestParam Instant checkout) {
-		return checkin.toString();
+	public ResponseEntity<Boolean> isAvailable(@RequestBody Long id,@RequestParam Instant checkin,@RequestParam Instant checkout) {
+		Boolean available = roomService.isAvailable(id,checkin,checkout);
+
+		return ResponseEntity.ok(available);
 	}
 }

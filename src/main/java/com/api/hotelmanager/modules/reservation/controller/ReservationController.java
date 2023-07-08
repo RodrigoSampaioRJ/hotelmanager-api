@@ -25,7 +25,6 @@ public class ReservationController {
 	@GetMapping("/{id}")
 	public ResponseEntity<ReservationResponse> getReservation(@PathVariable Long id){
 		ReservationResponse reservationResponse = reservationService.findById(id);
-		
 		return ResponseEntity.ok(reservationResponse);
 	}
 	

@@ -13,5 +13,5 @@ public interface IRoomService {
     Page<RoomResponse> findAll(Pageable pageable);
     RoomResponse findById(Long id);
     void delete(Long id);
-    boolean isAvailable(Instant checkin, Instant checkout);
+    boolean isAvailable(Long id, Instant checkin, Instant checkout);
 }

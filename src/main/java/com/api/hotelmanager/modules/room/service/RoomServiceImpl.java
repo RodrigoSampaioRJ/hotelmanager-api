@@ -7,13 +7,9 @@ import com.api.hotelmanager.modules.room.dto.RoomResponse;
 import com.api.hotelmanager.modules.room.entity.Room;
 import com.api.hotelmanager.modules.room.mapper.RoomMapper;
 import com.api.hotelmanager.modules.room.repository.IRoomRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -58,12 +54,12 @@ public class RoomServiceImpl implements  IRoomService{
     }
 
     @Override
-    public boolean isAvailable(Instant checkin, Instant checkout) {
-//        ObjectMapper om = new Jackson2ObjectMapperBuilder().modules(new JavaTimeModule())
-//                .build()
-//                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-
-
+    public boolean isAvailable(Long id, Instant checkin, Instant checkout) {
+        System.out.println(id);
+        Optional<Room> room = roomRepository.findById(id);
+        if(room.isPresent()){
+            return room.get().isAvailable(checkin,checkout);
+        }
         return false;
     }
 

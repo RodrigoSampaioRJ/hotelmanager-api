@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -42,8 +43,10 @@ public class Room implements Serializable {
 	@JsonManagedReference
 	private List<Reservation> reservations;
 	
-	public Boolean isAvailable() {
-		return null;
+	public Boolean isAvailable(Instant checkIn, Instant checkOut) {
+		return this.reservations.stream()
+				.noneMatch(reservation -> reservation.getCheckIn().isBefore(checkOut)
+						&& reservation.getCheckOut().isAfter(checkIn));
 	}
 
 }
