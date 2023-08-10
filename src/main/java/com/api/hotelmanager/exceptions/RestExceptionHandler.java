@@ -2,6 +2,7 @@ package com.api.hotelmanager.exceptions;
 
 import com.api.hotelmanager.exceptions.dto.ArgumentNotValidExceptionDto;
 import com.api.hotelmanager.exceptions.dto.EntityNotFoundExceptionDto;
+import com.api.hotelmanager.exceptions.dto.ReservationDateNotValidExceptionDto;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,9 @@ import java.util.List;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
-	
+
+	private Exception exception;
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	public List<ArgumentNotValidExceptionDto> argumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
@@ -31,10 +34,12 @@ public class RestExceptionHandler {
 	@ExceptionHandler(value = {EntityNotFoundException.class})
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	public EntityNotFoundExceptionDto entityNotFoundExceptionHandler(Exception ex, HttpServletRequest req) {
-		
-		
 		return new EntityNotFoundExceptionDto(ex.getMessage());
-
 	}
 
+	@ExceptionHandler(value = {MethodArgumentNotValidException.class})
+	@ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE)
+	public ReservationDateNotValidExceptionDto reservationDateNotValidExceptionHandler(MethodArgumentNotValidException ex){
+		return new ReservationDateNotValidExceptionDto(ex.getMessage());
+	}
 }

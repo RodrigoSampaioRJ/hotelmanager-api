@@ -1,5 +1,6 @@
 package com.api.hotelmanager.modules.room.service;
 
+import com.api.hotelmanager.exceptions.dto.ReservationDateNotValidExceptionDto;
 import com.api.hotelmanager.modules.hotel.entity.Hotel;
 import com.api.hotelmanager.modules.hotel.repository.IHotelRepository;
 import com.api.hotelmanager.modules.room.dto.RoomRequest;
@@ -55,7 +56,9 @@ public class RoomServiceImpl implements  IRoomService{
 
     @Override
     public boolean isAvailable(Long id, Instant checkin, Instant checkout) {
-        System.out.println(id);
+        if (checkin.isAfter(checkout)) {
+            throw new ReservationDateNotValidExceptionDto("Check-in date must be before check-out");
+        }
         Optional<Room> room = roomRepository.findById(id);
         if(room.isPresent()){
             return room.get().isAvailable(checkin,checkout);

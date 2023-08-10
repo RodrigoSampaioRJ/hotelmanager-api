@@ -32,12 +32,14 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public Reservation save(ReservationRequest reservationRequest) {
-        Optional<Guest> guest = guestRespository.findById(reservationRequest.guest().getId());
+        Guest guest = guestRespository.findById(reservationRequest.guest().getId()).orElseThrow(
+                () -> new EntityNotFoundException("Guest not found")
+        );
         Optional<Room> room = roomRepository.findById(reservationRequest.room().getId());
         Reservation reservation = mapper.mapToReservation(reservationRequest);
-        if(guest.isPresent() && room.isPresent()){
+        if(room.isPresent()){
             reservation.setRoom(room.get());
-            reservation.setGuest(guest.get());
+            reservation.setGuest(guest);
         }
         return reservationRepository.save(reservation);
     }
@@ -50,7 +52,7 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public ReservationResponse findById(Long id) {
-        return mapper.mapToReservationResponse(reservationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Rservation not found")));
+        return mapper.mapToReservationResponse(reservationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Reservation not found")));
     }
 
     @Override

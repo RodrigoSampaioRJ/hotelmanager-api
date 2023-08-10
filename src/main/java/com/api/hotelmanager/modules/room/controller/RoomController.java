@@ -48,8 +48,8 @@ public class RoomController {
 		return ResponseEntity.created(uri).body(room);
 	}
 
-	@GetMapping(path ="/isavailable")
-	public ResponseEntity<Boolean> isAvailable(@RequestBody Long id,@RequestParam Instant checkin,@RequestParam Instant checkout) {
+	@GetMapping(path ="/isavailable/{id}")
+	public ResponseEntity<Boolean> isAvailable(@PathVariable Long id,@RequestParam Instant checkin,@RequestParam Instant checkout) {
 		Boolean available = roomService.isAvailable(id,checkin,checkout);
 
 		return ResponseEntity.ok(available);
