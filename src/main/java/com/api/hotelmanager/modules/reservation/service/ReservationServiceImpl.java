@@ -1,29 +1,31 @@
 package com.api.hotelmanager.modules.reservation.service;
 
-import com.api.hotelmanager.modules.guest.entity.Guest;
-import com.api.hotelmanager.modules.guest.repository.IGuestRepository;
-import com.api.hotelmanager.modules.guest.service.IGuestService;
-import com.api.hotelmanager.modules.reservation.dto.ReservationRequest;
-import com.api.hotelmanager.modules.reservation.dto.ReservationResponse;
-import com.api.hotelmanager.modules.reservation.entity.Reservation;
-import com.api.hotelmanager.modules.reservation.mapper.ReservationMapper;
-import com.api.hotelmanager.modules.reservation.repository.IReservationRepository;
-import com.api.hotelmanager.modules.room.entity.Room;
-import com.api.hotelmanager.modules.room.repository.IRoomRepository;
-import jakarta.persistence.EntityNotFoundException;
+import java.util.Optional;
+import java.util.function.Function;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
+import com.api.hotelmanager.modules.guest.entity.Guest;
+import com.api.hotelmanager.modules.guest.repository.IGuestRepository;
+import com.api.hotelmanager.modules.reservation.dto.ReservationRequest;
+import com.api.hotelmanager.modules.reservation.dto.ReservationResponse;
+import com.api.hotelmanager.modules.reservation.entity.Reservation;
+import com.api.hotelmanager.modules.reservation.repository.IReservationRepository;
+import com.api.hotelmanager.modules.room.entity.Room;
+import com.api.hotelmanager.modules.room.repository.IRoomRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 public class ReservationServiceImpl implements IReservationService {
 
     private final IGuestRepository guestRespository;
     private final IRoomRepository roomRepository;
     private final IReservationRepository reservationRepository;
-    private final ReservationMapper mapper;
+    private final ModelMapper mapper;
 
-    public ReservationServiceImpl(IGuestRepository guestRespository,IRoomRepository roomRepository, IReservationRepository reservationRepository, ReservationMapper mapper) {
+    public ReservationServiceImpl(IGuestRepository guestRespository,IRoomRepository roomRepository, IReservationRepository reservationRepository, ModelMapper mapper) {
         this.reservationRepository = reservationRepository;
         this.mapper = mapper;
         this.guestRespository = guestRespository;
@@ -36,7 +38,7 @@ public class ReservationServiceImpl implements IReservationService {
                 () -> new EntityNotFoundException("Guest not found")
         );
         Optional<Room> room = roomRepository.findById(reservationRequest.room().getId());
-        Reservation reservation = mapper.mapToReservation(reservationRequest);
+        Reservation reservation = mapper.map(reservationRequest, Reservation.class);
         if(room.isPresent()){
             reservation.setRoom(room.get());
             reservation.setGuest(guest);
@@ -47,12 +49,18 @@ public class ReservationServiceImpl implements IReservationService {
     @Override
     public Page<ReservationResponse> findAll(Pageable pageable) {
         Page<Reservation> reservationPage = reservationRepository.findAll(pageable);
-        return reservationPage.map(mapper::mapToReservationResponse);
+        Page<ReservationResponse> reservationResponsePage = reservationPage.map(new Function<Reservation, ReservationResponse>() {
+            @Override
+            public ReservationResponse apply(Reservation reservation){
+                return new ModelMapper().map(reservation, ReservationResponse.class);
+            }
+        });
+        return reservationResponsePage;
     }
 
     @Override
     public ReservationResponse findById(Long id) {
-        return mapper.mapToReservationResponse(reservationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Reservation not found")));
+        return mapper.map(reservationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Reservation not found")), ReservationResponse.class);
     }
 
     @Override

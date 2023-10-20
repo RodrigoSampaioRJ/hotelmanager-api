@@ -1,13 +1,13 @@
 package com.api.hotelmanager.modules.hotel.repository;
 
-import com.api.hotelmanager.modules.hotel.entity.Hotel;
-import com.api.hotelmanager.modules.room.entity.Room;
+import java.util.Optional;
+
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import com.api.hotelmanager.modules.hotel.entity.Hotel;
 
 @Component
 @Primary

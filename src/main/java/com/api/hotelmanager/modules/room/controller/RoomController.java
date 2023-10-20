@@ -1,19 +1,24 @@
 package com.api.hotelmanager.modules.room.controller;
 
+import java.net.URI;
+import java.time.Instant;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import com.api.hotelmanager.modules.room.dto.RoomRequest;
 import com.api.hotelmanager.modules.room.dto.RoomResponse;
 import com.api.hotelmanager.modules.room.entity.Room;
 import com.api.hotelmanager.modules.room.service.IRoomService;
-import com.api.hotelmanager.modules.room.service.RoomServiceImpl;
-import com.api.hotelmanager.modules.user.service.IUserService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.time.Instant;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/room")

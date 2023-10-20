@@ -3,6 +3,7 @@ package com.api.hotelmanager.modules.guest.dto;
 import com.api.hotelmanager.modules.reservation.entity.Reservation;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public record GuestRequest (
 		String email,	
 		@NotBlank(message = "Phone must not be empty")
 		String phone,
+		@NotNull
 		List<Reservation> reservations){}
