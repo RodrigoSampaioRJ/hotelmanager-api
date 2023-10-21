@@ -2,13 +2,13 @@ package com.api.hotelmanager.modules.hotel.service;
 
 import java.util.function.Function;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.api.hotelmanager.modules.hotel.dto.HotelRequest;
 import com.api.hotelmanager.modules.hotel.dto.HotelResponse;
 import com.api.hotelmanager.modules.hotel.entity.Hotel;
+import com.api.hotelmanager.modules.hotel.mapper.HotelMapper;
 import com.api.hotelmanager.modules.hotel.repository.IHotelRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -16,16 +16,16 @@ import jakarta.persistence.EntityNotFoundException;
 public class HotelServiceImpl implements  IHotelService{
 	
 	private final IHotelRepository hotelRepository;
-	private final ModelMapper mapper;
+	private final HotelMapper mapper;
 
-	public HotelServiceImpl(IHotelRepository hotelRepository, ModelMapper mapper){
+	public HotelServiceImpl(IHotelRepository hotelRepository, HotelMapper mapper){
 		this.hotelRepository = hotelRepository;
 		this.mapper = mapper;
 	}
 
 	@Override
 	public Hotel save(HotelRequest hotelRequest) {
-		return hotelRepository.save(mapper.map(hotelRequest, Hotel.class));
+		return hotelRepository.save(mapper.hotelRequestToHotel(hotelRequest));
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class HotelServiceImpl implements  IHotelService{
 
 			@Override
 			public HotelResponse apply(Hotel hotel){
-				return new ModelMapper().map(hotel,HotelResponse.class);
+				return mapper.hotelTHotelResponse(hotel);
 			}
 		});
 		return hotelResponsePage;
@@ -43,7 +43,10 @@ public class HotelServiceImpl implements  IHotelService{
 
 	@Override
 	public HotelResponse findById(Long id) {
-		return mapper.map(hotelRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Hotel not found")), HotelResponse.class);
+
+		HotelResponse hotelResponse = mapper.hotelTHotelResponse(hotelRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Hotel not found")));
+
+		return hotelResponse;
 	}
 
 	@Override

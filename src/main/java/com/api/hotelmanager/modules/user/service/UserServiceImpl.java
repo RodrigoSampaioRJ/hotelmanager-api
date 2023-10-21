@@ -1,6 +1,5 @@
 package com.api.hotelmanager.modules.user.service;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +9,7 @@ import com.api.hotelmanager.modules.profile.repository.IProfileRepository;
 import com.api.hotelmanager.modules.user.dto.UserRequest;
 import com.api.hotelmanager.modules.user.dto.UserResponse;
 import com.api.hotelmanager.modules.user.entity.User;
+import com.api.hotelmanager.modules.user.mapper.UserMapper;
 import com.api.hotelmanager.modules.user.repository.IUserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -19,13 +19,13 @@ public class UserServiceImpl implements IUserService {
   private final IUserRepository userRepository;
   private final BCryptPasswordEncoder bcrypt;
   private final IProfileRepository profileRepository;
-  private final ModelMapper mapper;
+  private final UserMapper mapper;
 
   public UserServiceImpl(
     IUserRepository userRepository,
     BCryptPasswordEncoder bcrypt,
     IProfileRepository profileRepository,
-    ModelMapper mapper
+    UserMapper mapper
   ) {
     this.userRepository = userRepository;
     this.bcrypt = bcrypt;
@@ -57,7 +57,7 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   public UserResponse findById(Long id) {
-    UserResponse userResponse = mapper.map(userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found")), UserResponse.class);
+    UserResponse userResponse = mapper.userToUserResponse(userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found")));
 
     return userResponse;
   }

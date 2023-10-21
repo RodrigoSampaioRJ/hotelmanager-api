@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.function.Function;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,6 +12,7 @@ import com.api.hotelmanager.modules.hotel.repository.IHotelRepository;
 import com.api.hotelmanager.modules.room.dto.RoomRequest;
 import com.api.hotelmanager.modules.room.dto.RoomResponse;
 import com.api.hotelmanager.modules.room.entity.Room;
+import com.api.hotelmanager.modules.room.mapper.RoomMapper;
 import com.api.hotelmanager.modules.room.repository.IRoomRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -21,9 +21,9 @@ public class RoomServiceImpl implements  IRoomService{
 
     private final IHotelRepository hotelRepository;
     private final IRoomRepository roomRepository;
-    private final ModelMapper mapper;
+    private final RoomMapper mapper;
 
-    public RoomServiceImpl(IRoomRepository roomRepository, IHotelRepository hotelRepository, ModelMapper mapper){
+    public RoomServiceImpl(IRoomRepository roomRepository, IHotelRepository hotelRepository, RoomMapper mapper){
         this.mapper = mapper;
         this.roomRepository = roomRepository;
         this.hotelRepository = hotelRepository;
@@ -31,7 +31,7 @@ public class RoomServiceImpl implements  IRoomService{
 
     @Override
     public Room save(RoomRequest roomRequest) {
-        Room room = roomRepository.save(mapper.map(roomRequest, Room.class));
+        Room room = roomRepository.save(mapper.roomRequestToRoom(roomRequest));
         return room;
     }
 
@@ -41,7 +41,7 @@ public class RoomServiceImpl implements  IRoomService{
         Page<RoomResponse> roomResponsePage = roomPage.map(new Function<Room,RoomResponse>() {
             @Override
             public RoomResponse apply(Room room){
-                return new ModelMapper().map(room, RoomResponse.class);
+                return mapper.roomToRoomResponse(room);
             }
         });
         return roomResponsePage;
@@ -53,7 +53,7 @@ public class RoomServiceImpl implements  IRoomService{
 
         Optional<Hotel> hotel = hotelRepository.findById(room.getHotel().getId());
         hotel.ifPresent(room::setHotel);
-        RoomResponse roomResponse = mapper.map(room, RoomResponse.class);
+        RoomResponse roomResponse = mapper.roomToRoomResponse(room);
         return roomResponse;
     }
 
