@@ -6,7 +6,7 @@ import java.util.List;
 
 public record UserResponse(
         String name,
-        String login,
+        String username,
         List<Profile> profiles,
         String email
 ) {

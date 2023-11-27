@@ -2,7 +2,7 @@ CREATE TABLE `tb_user`
 (
     `id`   bigint NOT NULL AUTO_INCREMENT,
     `name` varchar(255) NOT NULL,
-    `login` varchar(255) NOT NULL,
+    `username` varchar(255) NOT NULL,
     `password` varchar(255) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB

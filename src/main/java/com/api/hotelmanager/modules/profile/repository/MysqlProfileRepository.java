@@ -38,4 +38,9 @@ public class MysqlProfileRepository implements IProfileRepository {
     public void delete(Long id) {
         this.profileRepository.deleteById(id);
     }
+
+    @Override
+    public Profile getById(Long id) {
+        return this.profileRepository.getReferenceById(id);
+    }
 }

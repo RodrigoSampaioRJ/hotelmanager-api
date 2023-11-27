@@ -28,14 +28,14 @@ public class MysqlUserRepository implements IUserRepository {
     }
 
     @Override
-    @Query("select u from User u where u.login like ?1")
-    public Optional<User> findByLogin(String login) {
-        return userRepository.findByLogin(login);
+    @Query("select u from User u where u.username like ?1")
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
     public User save(User user) {
-        return null;
+        return this.userRepository.save(user);
     }
 
     @Override

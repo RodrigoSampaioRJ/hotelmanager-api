@@ -11,4 +11,6 @@ public interface IProfileRepository {
     Page<Profile> findAll(Pageable pageable);
     Profile save(Profile profile);
     void delete(Long id);
+
+    Profile getById(Long id);
 }

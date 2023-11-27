@@ -7,10 +7,10 @@ public record UserRequest(
         @NotBlank
         String name,
         @NotBlank
-        String login,
+        String username,
         @NotBlank
         String password,
         @NotBlank
         @Email
         String email,
-        Long profile_id) { }
+        Long profile_id ) { }
