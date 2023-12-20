@@ -1,0 +1,1 @@
+ALTER TABLE tb_guest ADD CONSTRAINT tb_guest_un UNIQUE KEY (email);

@@ -37,4 +37,9 @@ public class MysqlGuestRepository implements IGuestRepository{
     public void delete(Long id) {
         this.guestRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Guest> findByEmail(String email) {
+        return this.guestRepository.findByEmail(email);
+    }
 }

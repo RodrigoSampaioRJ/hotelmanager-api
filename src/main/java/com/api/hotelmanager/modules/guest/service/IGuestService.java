@@ -11,4 +11,5 @@ public interface IGuestService {
     Page<GuestResponse> findAll(Pageable pageable);
     GuestResponse findById(Long id);
     void delete(Long id);
+    GuestResponse update(Long id, GuestRequest guestRequest);
 }

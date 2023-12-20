@@ -1,5 +1,9 @@
 package com.api.hotelmanager.modules.user.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.api.hotelmanager.modules.profile.entity.Profile;
 import com.api.hotelmanager.modules.profile.repository.IProfileRepository;
 import com.api.hotelmanager.modules.user.dto.UserRequest;
@@ -7,12 +11,8 @@ import com.api.hotelmanager.modules.user.dto.UserResponse;
 import com.api.hotelmanager.modules.user.entity.User;
 import com.api.hotelmanager.modules.user.mapper.UserMapper;
 import com.api.hotelmanager.modules.user.repository.IUserRepository;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Optional;
+import jakarta.persistence.EntityNotFoundException;
 
 public class UserServiceImpl implements IUserService {
 
