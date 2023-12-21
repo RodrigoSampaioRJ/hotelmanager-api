@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.api.hotelmanager.exceptions.EmailAlreadyInUseException;
 import com.api.hotelmanager.modules.guest.dto.GuestRequest;
 import com.api.hotelmanager.modules.guest.dto.GuestResponse;
 import com.api.hotelmanager.modules.guest.entity.Guest;
@@ -15,7 +16,6 @@ import com.api.hotelmanager.modules.guest.mapper.GuestMapper;
 import com.api.hotelmanager.modules.guest.repository.IGuestRepository;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.NonUniqueResultException;
 
 @Service
 public class GuestServiceImpl implements  IGuestService{
@@ -36,7 +36,7 @@ public class GuestServiceImpl implements  IGuestService{
 		Optional<Guest> guestOpt = guestRepository.findByEmail(guestRequest.email());
 
 		if(guestOpt.isPresent()){
-			throw new NonUniqueResultException("Email already in use!");
+			throw new EmailAlreadyInUseException();
 		}
 		
 		Guest guest  = mapper.guestRequestToGuest(guestRequest);
