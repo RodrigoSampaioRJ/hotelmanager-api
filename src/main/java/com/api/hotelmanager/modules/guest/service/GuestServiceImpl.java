@@ -9,13 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.hotelmanager.exceptions.EmailAlreadyInUseException;
+import com.api.hotelmanager.exceptions.EntityNotFoundException;
 import com.api.hotelmanager.modules.guest.dto.GuestRequest;
 import com.api.hotelmanager.modules.guest.dto.GuestResponse;
 import com.api.hotelmanager.modules.guest.entity.Guest;
 import com.api.hotelmanager.modules.guest.mapper.GuestMapper;
 import com.api.hotelmanager.modules.guest.repository.IGuestRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class GuestServiceImpl implements  IGuestService{

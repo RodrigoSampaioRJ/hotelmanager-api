@@ -1,3 +1,8 @@
 package com.api.hotelmanager.exceptions.dto;
 
-public record EntityNotFoundExceptionDto(String message) {}
+import lombok.Builder;
+
+@Builder
+public record EntityNotFoundExceptionDto(String message) {
+    
+}

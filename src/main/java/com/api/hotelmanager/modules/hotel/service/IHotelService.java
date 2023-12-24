@@ -11,4 +11,5 @@ public interface IHotelService {
     Page<HotelResponse> findAll(Pageable pageable);
     HotelResponse findById(Long id);
     void delete(Long id);
+    HotelResponse update(Long id, HotelRequest hotelRequest);
 }
