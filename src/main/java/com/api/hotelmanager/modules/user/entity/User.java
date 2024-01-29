@@ -2,7 +2,10 @@ package com.api.hotelmanager.modules.user.entity;
 
 import com.api.hotelmanager.modules.profile.entity.Profile;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

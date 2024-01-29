@@ -6,20 +6,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    	return http.httpBasic()
-				.and()
-    			.authorizeHttpRequests()
-				.requestMatchers("/api/user/**").authenticated()
-				.anyRequest().authenticated()
-				.and()
-				.csrf().disable()
-    			.build();
+    	return http.httpBasic(withDefaults())
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/api/user/**").authenticated()
+                        .anyRequest().authenticated())
+                .csrf(csrf -> csrf.disable())
+                .build();
     }
 
 //    @Autowired
