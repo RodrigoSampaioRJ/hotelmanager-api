@@ -1,0 +1,2 @@
+INSERT INTO tb_profile VALUES (1,'ROLE_ADMIN');
+INSERT INTO tb_profile VALUES (2,'ROLE_USER');
