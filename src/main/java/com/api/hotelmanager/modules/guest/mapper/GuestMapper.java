@@ -13,6 +13,6 @@ public interface GuestMapper {
     GuestResponse guestToGuestResponse(Guest guest);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "reservation", ignore = true)
+    @Mapping(target = "reservations", ignore = true)
     Guest guestRequestToGuest(GuestRequest guestRequest);
 }
